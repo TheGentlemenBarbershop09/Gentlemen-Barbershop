@@ -44,7 +44,28 @@
       <option value="styling">Styling</option>
     </select>
     <input type="date" name="date" placeholder="Date">
-    <input type="time" name="time" min="09:00" max="08:00" step="3600" pattern="^(0[1-9]|1[0-2]):[0-5][0-9] [APap][mM]$" placeholder="Time">
+    <input type="time" name="time" id="timeInput" min="09:00" max="20:00" placeholder="Time">
+
+<script>
+    document.getElementById('timeInput').addEventListener('input', function () {
+        // Get the input value
+        var inputValue = this.value;
+
+        // Extract hours and minutes
+        var hours = parseInt(inputValue.substring(0, 2));
+        var minutes = inputValue.substring(3);
+
+        // Convert to 12-hour format without AM/PM
+        var amPm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12; // Handle midnight (00:00) as 12 AM
+
+        // Update the input value
+        this.value = (hours < 10 ? '0' : '') + hours + ':' + minutes;
+
+        // You can also add amPm to the value if needed
+        // this.value += ' ' + amPm;
+    });
+</script>
 
     <button type="submit">Book Appointment</button>
   </form>
