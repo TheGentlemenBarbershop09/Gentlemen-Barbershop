@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Online Appointment System</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      margin: 0 auto;
+      width: 50%;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #000;
+      color: #fff;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    #error-message,
+    #success-message {
+      color: red;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Book an Appointment</h1>
+
+  <form action="https://formsubmit.co/yvesgaming09@gmail.com" method="post" id="appointmentForm">
+    <input type="text" name="name" placeholder="Your name" required>
+    <input type="email" name="email" placeholder="Your email" required>
+    <select name="service" required>
+      <option value="">Select a service</option>
+      <option value="haircut">Haircut</option>
+      <option value="coloring">Coloring</option>
+      <option value="styling">Styling</option>
+    </select>
+    <input type="date" name="date" placeholder="Date" required>
+    <input type="time" name="time" placeholder="Time" required>
+    <button type="submit">Book Appointment</button>
+
+    <div id="error-message"></div>
+    <div id="success-message"></div>
+  </form>
+
+  <script>
+    const appointmentForm = document.getElementById('appointmentForm');
+    appointmentForm.addEventListener('submit', (event) => {
+      event.preventDefault(); // Prevent default form submission
+
+      if (!isFormComplete()) {
+        displayErrorMessage('Please fill out all required fields.');
+      } else {
+        // Simulate successful appointment booking
+        displaySuccessMessage('Your appointment has been booked.');
+        window.setTimeout(() => {
+          window.location.href = '/homepage'; // Redirect to homepage after 5 seconds
+        }, 5000);
+      }
+    });
+
+    function isFormComplete() {
+      const nameInput = document.querySelector('input[name="name"]');
+      const emailInput = document.querySelector('input[name="email"]');
+      const serviceSelect = document.querySelector('select[name="service"]');
+      const dateInput = document.querySelector('input[name="date"]');
+      const timeInput = document.querySelector('input[name="time"]');
+
+      return nameInput.value && emailInput.value && serviceSelect.value && dateInput.value && timeInput.value;
+    }
+
+    function displayErrorMessage(message) {
+      const errorMessageElement = document.getElementById('error-message');
+      errorMessageElement.textContent = message;
+    }
+
+    function displaySuccessMessage(message) {
+      const successMessageElement = document.getElementById('success-message');
+      successMessageElement.textContent = message;
+    }
+  </script>
+</body>
+</html>
